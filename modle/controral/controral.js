@@ -244,7 +244,7 @@ catch(error){
 
 
 
-router.put("/inforProdectAddComment",async(req,res)=>{
+router.put("/inforProdectAddLike",async(req,res)=>{
   try{
   const u=await inforProudect.findByIdAndUpdate(
     req.body.id,
