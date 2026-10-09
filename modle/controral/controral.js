@@ -156,23 +156,6 @@ router.post("/alippp",async(req,res)=>{
 
 //     res.status(200).json(a)
 // })
-router.post("/inP",upload.single('image'), async(req,res)=>{
-    try{
-    const inp=new inforPost()
-    inp.title=req.body.title
-   inp.image=req.file ? req.file.filename:"";
-   inp.auther=req.body.auther
-   inp.likes=req.body.likes
-   inp.commentText=""
-   inp.userSub=""
-    await inp.save()
-    
-    res.status(200).json("s")}
-    catch(error){
-        res.json( {error: error.message })
-        console.log(error)
-    }
-})
 router.get("/inP",async(req,res)=>{
   
 
@@ -221,7 +204,7 @@ router.put("/inforProdectAddLike",async(req,res)=>{
   try{
   const u=await inforProudect.findByIdAndUpdate(
     req.body.id,
-    {$inc:{likeCounter:1}},
+    {$inc:{likes:1}},
       { new: true }
   )
   res.json({message:"تمت اضافة لايك ", likes: u.likes})
@@ -340,13 +323,30 @@ router.post("/addComment", async (req, res) => {
 
 
 
+router.post("/inP",upload.single('image'), async(req,res)=>{
+    try{
+    const inp=new inforPost()
+    inp.title=req.body.title
+   inp.image=req.file ? req.file.filename:"";
+   inp.auther=req.body.auther
+   inp.likes=req.body.likes
+   inp.commentText=""
+   inp.userSub=""
+    await inp.save()
+    
+    res.status(200).json("s")}
+    catch(error){
+        res.json( {error: error.message })
+        console.log(error)
+    }
+})
 router.post("/inforProdect",async(req,res)=>{
 try{
   // الآن ستكون req.body مليئة بالبيانات المستقبلة من FormData
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "لم يتم إرسال بيانات في req.body" });
     }
-  const{title,slug,price,description,image1,image2,image3,name,creationAt}=req.body
+  const{title,slug,price,description,image1,image2,image3,name,creationAt,likes}=req.body
   const inforPro=new inforProudect()
 inforPro.title=title
 inforPro.slug=slug
@@ -357,6 +357,7 @@ inforPro.images[1]=image2
 inforPro.images[2]=image3
 inforPro.creationAt=creationAt
 inforPro.name=name
+inforPro.likes=likes
 await inforPro.save()
 res.json("تمت اضافة منتج ")
 }catch(error){
