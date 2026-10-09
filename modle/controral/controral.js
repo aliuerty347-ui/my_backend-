@@ -224,7 +224,7 @@ router.put("/inforProdectAddLike",async(req,res)=>{
     {$inc:{likeCounter:1}},
       { new: true }
   )
-  res.json({message:"تمت اضافة لايك ", likes: u.likeCounter})
+  res.json({message:"تمت اضافة لايك ", likes: u.likes})
 }catch(error){
   console.log(error)
   res.json({message:error.message})
