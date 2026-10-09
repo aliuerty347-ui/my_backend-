@@ -26,7 +26,7 @@ title:{
     creationAt:{
             type:Date,
         },
-        likeCounter:{
+        likes:{
             type:Number
         },
         

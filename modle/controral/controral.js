@@ -189,6 +189,50 @@ router.delete("/inP/a", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.put("/inforProdectAddLike",async(req,res)=>{
+  try{
+  const u=await inforProudect.findByIdAndUpdate(
+    req.body.id,
+    {$inc:{likeCounter:1}},
+      { new: true }
+  )
+  res.json({message:"تمت اضافة لايك ", likes: u.likeCounter})
+}catch(error){
+  console.log(error)
+  res.json({message:error.message})
+
+}
+})
+
+
 // controller/post.js (أو في ملف التحلكم الخاص بك)
 router.put("/like", async (req, res) => {
   try {
@@ -241,23 +285,6 @@ catch(error){
 
 
 
-
-
-
-router.put("/inforProdectAddLike",async(req,res)=>{
-  try{
-  const u=await inforProudect.findByIdAndUpdate(
-    req.body.id,
-    {$inc:{likeCounter:1}},
-      { new: true }
-  )
-  res.json({message:"تمت اضافة لايك ", likes: u.likeCounter})
-}catch(error){
-  console.log(error)
-  res.json({message:error.message})
-
-}
-})
 
 
 
