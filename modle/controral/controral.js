@@ -122,7 +122,7 @@ router.post("/alippp",async(req,res)=>{
             {expiresIn:'1h'}
           )
     res.json({
-      mesage:"Login successful",
+      message:"Login successful",
       token:token,
       user:{
         id:seruser._id,
